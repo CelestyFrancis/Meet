@@ -1,4 +1,5 @@
 # Getting Started with Meet Frontend
-
-npm i
-npm start
+<ul>
+  <li>npm i</li>
+  <li>npm start</li>
+</ul>
