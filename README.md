@@ -2,5 +2,7 @@
 A Demo social Media Platform
 # Front-end
 ReactJS
-# Backend
+# Backend 
 Python
+# Database
+PostgreSQL
