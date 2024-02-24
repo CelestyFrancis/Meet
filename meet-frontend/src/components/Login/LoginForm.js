@@ -1,43 +1,57 @@
-// src/components/LoginForm.js
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { loginUser } from '../../actions/authActions'
 import './LoginForm.css'
+import { useNavigate } from 'react-router-dom'
+import Error from '../Error/Error'
 
 const LoginForm = () => {
-  const [username, setUsername] = useState('')
+  const navigate = useNavigate()
+  const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const dispatch = useDispatch()
   const auth = useSelector(state => state.auth)
 
   const handleLogin = () => {
-    const userData = { username, password }
+    const userData = { email, password }
     dispatch(loginUser(userData))
   }
 
+  useEffect(() => {
+    if (auth.isAuthenticated) {
+      localStorage.setItem('user', auth.user)
+      localStorage.setItem('userId', auth.userId)
+      sessionStorage.setItem('token', auth.token)
+
+      navigate('/dashboard')
+    }
+  }, [auth])
+
   return (
-    <div className='login-form'>
-      <h2>MEET</h2>
-      {auth.error && <p style={{ color: 'red' }}>{auth.error}</p>}
-      <div className='content'>
-        <div className='input-field'>
-          <input
-            type='text'
-            placeholder='Username'
-            value={username}
-            onChange={e => setUsername(e.target.value)}
-          />
+    <div>
+      <div className='login-form'>
+        <h2>MEET</h2>
+        {auth.error && <Error error={auth.error} />}
+        <div className='content'>
+          <div className='input-field'>
+            <input
+              type='text'
+              placeholder='Email'
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+            />
+          </div>
+          <div className='input-field'>
+            <input
+              type='password'
+              placeholder='Password'
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+            />
+          </div>
         </div>
-        <div className='input-field'>
-          <input
-            type='password'
-            placeholder='Password'
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-          />
-        </div>
+        <button onClick={handleLogin}>Login</button>
       </div>
-      <button onClick={handleLogin}>Login</button>
     </div>
   )
 }

@@ -3,6 +3,8 @@ import * as auth from '../constants/authConstants'
 const initialState = {
   isAuthenticated: false,
   user: null,
+  userId: null,
+  email: null,
   token: null,
   error: null
 }
@@ -13,8 +15,9 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         isAuthenticated: true,
-        user: action.payload.user,
+        user: action.payload.username,
         token: action.payload.token,
+        userId: action.payload.id,
         error: null
       }
 
@@ -24,7 +27,7 @@ const authReducer = (state = initialState, action) => {
         isAuthenticated: false,
         user: null,
         token: null,
-        error: action.payload.message
+        error: action.payload
       }
 
     default:

@@ -1,0 +1,60 @@
+.posts {
+  display: flex;
+  flex-direction: column;
+  margin-left: 15%; /* Same as the width of the sidebar */
+  padding: 0px 10px;
+}
+
+.post {
+  display: flex;
+  flex-direction: column;
+  margin-right: 3%;
+  margin-left: 3%;
+  margin-top: 1.5%;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  background: white;
+  line-height: 1.4;
+  font-family: sans-serif;
+  border-radius: 5px;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.post .section {
+  padding: 2%;
+}
+
+.post h1 {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-weight: 400;
+  color: #423b35;
+  text-align: left;
+  font-size: 26px;
+}
+
+.post h1::first-letter {
+  font-weight: 700;
+  font-size: 40px;
+}
+
+.post p {
+  outline-offset: 110px;
+  text-align-last: center;
+  font-family: open sans;
+  font-weight: 400;
+}
+
+.post .readmore {
+  text-decoration-color: #dfccae;
+  text-decoration: overline;
+  color: #423b35;
+  display: block;
+  float: right;
+  font-family: 'Playfair Display', serif;
+  border-bottom: 2px inset #423b35;
+}
+
+.post .readmore:hover {
+  color: #f4821c;
+}
