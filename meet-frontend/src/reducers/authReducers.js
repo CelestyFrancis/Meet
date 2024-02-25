@@ -29,7 +29,32 @@ const authReducer = (state = initialState, action) => {
         token: null,
         error: action.payload
       }
-
+    case auth.REGISTER_FAILURE:
+      return {
+        ...state,
+        isAuthenticated: false,
+        user: null,
+        token: null,
+        error: action.payload
+      }
+    case auth.REGISTER_SUCCESS:
+      return {
+        ...state,
+        isAuthenticated: true,
+        user: action.payload.username,
+        token: action.payload.token,
+        userId: action.payload.id,
+        error: null
+      }
+    case auth.LOGOUT:
+      return {
+        ...state,
+        isAuthenticated: false,
+        user: null,
+        token: null,
+        userId: null,
+        error: null
+      }
     default:
       return state
   }

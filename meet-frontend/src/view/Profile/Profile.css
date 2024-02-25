@@ -1,0 +1,45 @@
+.profile {
+  display: flex;
+  flex-direction: column;
+  margin-left: 15%; /* Same as the width of the sidebar */
+  padding: 0px 10px;
+  height: 50%;
+}
+
+.profile-wrap {
+  margin: 9% 1% 3% 1%;
+  overflow: hidden;
+  border-radius: 3px;
+  background: white;
+  box-shadow: 0 17px 50px 0 rgba(0, 0, 0, 0.19),
+    0 12px 15px 0 rgba(0, 0, 0, 0.24);
+}
+
+.profile .profile-header i,
+.profile .profile-header p {
+  padding: 10px;
+  display: block;
+  text-decoration: none;
+  font-size: 22px;
+}
+
+.profile-header {
+  display: flex;
+  background-color: #e8d0a9;
+  border-radius: 2%;
+  color: white;
+}
+
+.profile-header p {
+  margin: 0;
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: row;
+  padding: 2%;
+}
+.profile-info .photo {
+  height: 20%;
+  width: 20%;
+}

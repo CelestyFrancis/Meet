@@ -1,22 +1,13 @@
-import React, { useEffect } from 'react'
+import React from 'react'
+import PropTypes from 'prop-types'
+
 import './PostList.css'
-import NewPost from '../Post/NewPost'
-import { useSelector } from 'react-redux'
-import { getPost } from '../../actions/postActions'
-import { useDispatch } from 'react-redux'
 
-const PostList = () => {
-  const dispatch = useDispatch()
-
-  const post = useSelector(state => state.post)
-  const posts = post.postList
-  useEffect(() => {
-    dispatch(getPost())
-  }, [])
+const PostList = props => {
+  const { posts } = props
 
   return (
     <div className='posts'>
-      <NewPost />
       {posts &&
         posts.map(post => (
           <div key={post[0]} className='post'>
@@ -29,6 +20,10 @@ const PostList = () => {
         ))}
     </div>
   )
+}
+
+PostList.propTypes = {
+  posts: PropTypes.any
 }
 
 export default PostList

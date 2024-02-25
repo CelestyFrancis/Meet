@@ -22,14 +22,13 @@
   transition-duration: 0.2s;
   height: 30px;
   width: 12%;
-  border-left: none;
-  border-right: none;
   text-decoration-color: #dfccae;
   color: #423b35;
   display: block;
   float: right;
-  font-family: 'Playfair Display', serif;
-  border-bottom: 2px inset #423b35;
+  border-radius: 50%;
+  border: none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .button:hover {
@@ -42,7 +41,7 @@ label {
   flex-direction: column;
 }
 
-.newPost h1 {
+.newPost h2 {
   margin: 0;
   margin-bottom: 1%;
   padding: 0;

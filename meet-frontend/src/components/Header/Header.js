@@ -1,18 +1,24 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 
+import { logout } from '../../actions/authActions'
 import './Header.css'
 
 const Header = props => {
   const { user } = props
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
-  const handleLogout = () => {
+  const handleLogout = e => {
+    e.preventDefault()
+    dispatch(logout())
+
     localStorage.clear()
     sessionStorage.clear()
 
-    navigate('/login')
+    navigate('/')
   }
 
   return (
@@ -22,7 +28,7 @@ const Header = props => {
       </div>
       <div className='log-out'>
         <p>hi {user}</p>
-        <i className='bx bx-log-out ' onClick={handleLogout}></i>
+        <i className='bx bx-log-out ' onClick={e => handleLogout(e)}></i>
       </div>
     </div>
   )

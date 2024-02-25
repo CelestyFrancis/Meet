@@ -1,6 +1,8 @@
+import { SERVER_URL } from '../constants/server'
+
 const createPost = async post => {
   try {
-    const response = await fetch('http://127.0.0.1:5000/post/create', {
+    const response = await fetch(SERVER_URL + '/post/create', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -21,9 +23,31 @@ const createPost = async post => {
   }
 }
 
-const getPosts = async () => {
+const getAllPosts = async () => {
   try {
-    const response = await fetch('http://127.0.0.1:5000/post/get', {
+    const response = await fetch(SERVER_URL + '/post/get', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: sessionStorage.getItem('token')
+      },
+      mode: 'cors'
+    })
+
+    if (response.status != 200) {
+      const data = await response.json()
+      throw new Error(data.message)
+    }
+    const data = await response.json()
+    return data
+  } catch (error) {
+    throw new Error(error.message)
+  }
+}
+
+const getUserPosts = async () => {
+  try {
+    const response = await fetch(SERVER_URL + '/post/get_my_post', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -44,7 +68,8 @@ const getPosts = async () => {
 }
 const postService = {
   createPost,
-  getPosts
+  getAllPosts,
+  getUserPosts
 }
 
 export default postService

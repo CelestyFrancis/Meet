@@ -24,13 +24,12 @@
   font-size: 28px;
 }
 .login-form .content {
-  padding: 35px;
+  padding: 5%;
   text-align: center;
 }
 .login-form input {
   font-size: 16px;
   display: block;
-  font-family: 'Rubik', sans-serif;
   width: 100%;
   padding: 10px 1px;
   border: 0;
@@ -75,4 +74,9 @@ body {
     rgba(251, 242, 227, 0.7903536414565826) 48%,
     rgba(242, 237, 230, 1) 92%
   );
+}
+
+.login-form a {
+  margin-bottom: 1%;
+  text-align: center;
 }

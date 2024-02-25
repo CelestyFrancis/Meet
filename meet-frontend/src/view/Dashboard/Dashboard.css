@@ -1,0 +1,6 @@
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  margin-left: 15%;
+  padding: 0px 10px;
+}

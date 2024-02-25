@@ -5,8 +5,8 @@ secret_key = "secret"
 algorithm = "HS256"
 
 
-def create_token(username):
-    token = jwt.encode({'username': username, 'exp': datetime.datetime.utcnow()+ datetime.timedelta(minutes=45)}, secret_key, algorithm)
+def create_token(user_email):
+    token = jwt.encode({'user': user_email, 'exp': datetime.datetime.utcnow()+ datetime.timedelta(minutes=45)}, secret_key, algorithm)
     return token
 
 def is_token_valid(token):
