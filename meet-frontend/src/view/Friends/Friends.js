@@ -18,7 +18,7 @@ const Friends = () => {
 
   useEffect(() => {
     dispatch(loadFriends())
-  }, [])
+  }, [dispatch])
 
   const friendIds = friends.map(f => f.id)
   const sentIds = sentRequests.map(f => f.id)

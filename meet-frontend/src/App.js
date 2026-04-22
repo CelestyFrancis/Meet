@@ -15,7 +15,7 @@ const App = () => {
     } else {
       setUser(localStorage.getItem('user'))
     }
-  }, [])
+  }, [navigate])
 
   return (
     <div className='app'>

@@ -17,7 +17,7 @@ const Dashboard = () => {
   useEffect(() => {
     dispatch(getAllPost())
     dispatch(loadFriends())
-  }, [])
+  }, [dispatch])
 
   return (
     <div className='dashboard'>

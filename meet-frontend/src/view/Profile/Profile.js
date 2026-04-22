@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import PostList from '../../components/PostList/PostList'
@@ -12,12 +12,12 @@ const Profile = () => {
   const posts = useSelector(state => state.post.userPost)
   const currentUserId = parseInt(localStorage.getItem('userId'))
 
-  const refresh = () => dispatch(getUserPosts(currentUserId))
+  const refresh = useCallback(() => dispatch(getUserPosts(currentUserId)), [dispatch, currentUserId])
 
   useEffect(() => {
     setUser(localStorage.getItem('user'))
     refresh()
-  }, [])
+  }, [refresh])
 
   return (
     <div className='profile'>
@@ -28,7 +28,7 @@ const Profile = () => {
         </div>
         <div className='profile-info'>
           <div className='photo'>
-            <img src={UserImage} width='110vh' />
+            <img src={UserImage} width='110vh' alt='Profile' />
           </div>
           <div className='html about-me'>
             <h4>{user}</h4>

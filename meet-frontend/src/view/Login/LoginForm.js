@@ -29,7 +29,7 @@ const LoginForm = () => {
       localStorage.setItem('userId', auth.userId)
       navigate('/dashboard')
     }
-  }, [auth])
+  }, [auth, navigate])
 
   return (
     <div>

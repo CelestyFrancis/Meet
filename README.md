@@ -2,6 +2,8 @@
 
 A social platform where users can post their thoughts, read what others are sharing, and manage their own posts.
 
+**Live demo:** [cf-meet.netlify.app](https://cf-meet.netlify.app)
+
 ## What it does
 
 - **Login** with one of four prebuilt demo accounts — no registration needed

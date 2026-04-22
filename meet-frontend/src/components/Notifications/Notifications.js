@@ -23,7 +23,7 @@ const Notifications = () => {
 
   useEffect(() => {
     dispatch(loadNotifications())
-  }, [])
+  }, [dispatch])
 
   useEffect(() => {
     if (!open) return
