@@ -1,6 +1,6 @@
 # Meet
 
-A social platform where users can post their thoughts, read what others are sharing, and manage their own posts.
+A platform where users can post their thoughts, read what others are sharing, and manage their own posts. Implemented to improve my skills.
 
 **Live demo:** [cf-meet.netlify.app](https://cf-meet.netlify.app)
 
