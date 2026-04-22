@@ -1,40 +1,31 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import PropTypes from 'prop-types'
 
-import { createPost, getAllPost } from '../../actions/postActions'
+import { createPost } from '../../actions/postActions'
 import './Post.css'
 
-const NewPost = () => {
+const NewPost = ({ onCreated }) => {
   const [content, setContent] = useState('')
   const [title, setTitle] = useState('')
-
-  const auth = useSelector(state => state.auth)
-  const post = useSelector(state => state.post)
   const dispatch = useDispatch()
 
   const handleSubmit = () => {
-    const author = auth.userId
-    const post = { content, title, author }
-    dispatch(createPost(post))
+    if (!title.trim() || !content.trim()) return
+    const authorId = parseInt(localStorage.getItem('userId'))
+    const authorName = localStorage.getItem('user')
+    dispatch(createPost({ title, content, authorId, authorName }))
     setTitle('')
     setContent('')
+    if (onCreated) onCreated()
   }
-
-  useEffect(() => {
-    if (post.postCreated) {
-      dispatch(getAllPost())
-    }
-  }, [post.postCreated])
 
   return (
     <div className='newPost'>
       <div className='input-field'>
         <div className='button-wrap'>
           <h2>Timeline</h2>
-
-          <button className='button' onClick={handleSubmit}>
-            POST
-          </button>
+          <button className='button' onClick={handleSubmit}>POST</button>
         </div>
         <label>
           <input
@@ -50,12 +41,16 @@ const NewPost = () => {
             onChange={e => setContent(e.target.value)}
             rows='5'
             cols='50'
-            placeholder='What is on your mind????'
+            placeholder='What is on your mind?'
           />
         </label>
       </div>
     </div>
   )
+}
+
+NewPost.propTypes = {
+  onCreated: PropTypes.func,
 }
 
 export default NewPost

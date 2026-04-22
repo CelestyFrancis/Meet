@@ -1,31 +1,24 @@
-import React from 'react'
 import { createBrowserRouter } from 'react-router-dom'
 
 import LoginForm from './view/Login/LoginForm'
-import RegisterForm from './view/Register/RegisterForm'
-import Profile from './view/Profile/Profile'
 import Dashboard from './view/Dashboard/Dashboard'
+import Profile from './view/Profile/Profile'
+import Friends from './view/Friends/Friends'
 import App from './App'
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <LoginForm />
-  },
-  {
-    path: 'register',
-    element: <RegisterForm />
+    element: <LoginForm />,
   },
   {
     element: <App />,
     children: [
       { path: 'dashboard', element: <Dashboard /> },
-      {
-        path: 'profile',
-        element: <Profile />
-      }
-    ]
-  }
+      { path: 'profile', element: <Profile /> },
+      { path: 'friends', element: <Friends /> },
+    ],
+  },
 ])
 
 export default router

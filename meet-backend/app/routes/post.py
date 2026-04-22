@@ -1,46 +1,65 @@
 from flask import Blueprint, request, jsonify
-from app.services.post_service import create_post, get_posts, get_user_posts
 from flask_cors import cross_origin
-from app.middleware.token import is_token_valid
 
+from app.services.post_service import create_post, get_posts, get_user_posts, update_post, delete_post
+from app.middleware.token import is_token_valid
 
 post_bp = Blueprint('post', __name__)
 
 
-@post_bp.route('/create', methods=['POST','OPTIONS'])
+def _auth():
+    token = request.headers.get('Authorization')
+    return is_token_valid(token) if token else None
+
+
+@post_bp.route('/create', methods=['POST', 'OPTIONS'])
 @cross_origin()
 def create():
+    payload = _auth()
+    if not payload:
+        return jsonify({'message': 'Unauthorized'}), 401
     data = request.get_json()
-    user_token = request.headers['Authorization']
-    check_token = is_token_valid(user_token)
-    if check_token:
-        isCreated = create_post(data.get('title'), data.get('content'), data.get('author'))
-        if isCreated:
-            return jsonify({'message': 'Post successfully created'}), 200
-        return jsonify({'message': 'Error while adding'}), 404
-    return jsonify({'message': 'TnAuthorized Access'}), 401
+    create_post(data.get('title'), data.get('content'), data.get('authorId'))
+    return jsonify({'message': 'Post created'}), 200
 
 
-@post_bp.route('/get', methods=['GET','OPTIONS'])
+@post_bp.route('/get', methods=['GET', 'OPTIONS'])
 @cross_origin()
 def get():
-    user_token = request.headers['Authorization']
-    check_token = is_token_valid(user_token)
-    if check_token:
-        posts = get_posts()
-        if posts:
-            return jsonify({'message': 'Post successfully created', 'posts': posts}), 200
-        return jsonify({'message': 'Error while fetching'}), 404
-    return jsonify({'message': 'UnAuthorized Access'}), 401
+    if not _auth():
+        return jsonify({'message': 'Unauthorized'}), 401
+    return jsonify({'message': 'OK', 'posts': get_posts()}), 200
 
-@post_bp.route('/get_my_post', methods=['GET','OPTIONS'])
+
+@post_bp.route('/get_my_post', methods=['GET', 'OPTIONS'])
 @cross_origin()
 def get_my_post():
-    user_token = request.headers['Authorization']
-    check_token = is_token_valid(user_token)
-    if check_token:
-        posts = get_user_posts(check_token["user"])
-        if posts:
-            return jsonify({'message': 'Post successfully created', 'posts': posts}), 200
-        return jsonify({'message': 'Error while fetching'}), 404
-    return jsonify({'message': 'UnAuthorized Access'}), 401
+    payload = _auth()
+    if not payload:
+        return jsonify({'message': 'Unauthorized'}), 401
+    return jsonify({'message': 'OK', 'posts': get_user_posts(payload['user_id'])}), 200
+
+
+@post_bp.route('/edit/<int:post_id>', methods=['PUT', 'OPTIONS'])
+@cross_origin()
+def edit(post_id):
+    payload = _auth()
+    if not payload:
+        return jsonify({'message': 'Unauthorized'}), 401
+    data = request.get_json()
+    ok = update_post(post_id, payload['user_id'], data.get('title'), data.get('content'))
+    if ok:
+        return jsonify({'message': 'Post updated'}), 200
+    return jsonify({'message': 'Post not found or not yours'}), 404
+
+
+@post_bp.route('/delete/<int:post_id>', methods=['DELETE', 'OPTIONS'])
+@cross_origin()
+def remove(post_id):
+    payload = _auth()
+    if not payload:
+        return jsonify({'message': 'Unauthorized'}), 401
+    ok = delete_post(post_id, payload['user_id'])
+    if ok:
+        return jsonify({'message': 'Post deleted'}), 200
+    return jsonify({'message': 'Post not found or not yours'}), 404

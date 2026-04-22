@@ -1,59 +1,37 @@
 import * as post from '../constants/postConstants'
 
 const initialState = {
-  postList: null,
+  postList: [],
   postCreated: null,
+  postModified: null,
   error: null,
-  userPost: null
+  userPost: [],
 }
 
-const authReducer = (state = initialState, action) => {
+const postReducer = (state = initialState, action) => {
   switch (action.type) {
     case post.CREATE_POST_SUCCESS:
-      return {
-        ...state,
-        postCreated: true,
-        postList: state.postLists,
-        error: null,
-        userPost: null
-      }
+      return { ...state, postCreated: true, error: null }
 
     case post.CREATE_POST_FAILURE:
-      return {
-        ...state,
-        postCreated: false,
-        postList: state.postList,
-        error: action.payload,
-        userPost: null
-      }
+      return { ...state, postCreated: false, error: action.payload }
+
     case post.GET_POST_SUCCESS:
-      return {
-        ...state,
-        postCreated: null,
-        postList: action.payload.posts,
-        error: null,
-        userPost: state.userPost
-      }
+      return { ...state, postCreated: null, postModified: null, postList: action.payload.posts, error: null }
+
     case post.GET_USER_POST_SUCCESS:
-      return {
-        ...state,
-        postCreated: null,
-        postList: state.postList,
-        error: null,
-        userPost: action.payload.posts
-      }
+      return { ...state, postCreated: null, postModified: null, userPost: action.payload.posts, error: null }
+
+    case post.EDIT_POST_SUCCESS:
+    case post.DELETE_POST_SUCCESS:
+      return { ...state, postModified: true, error: null }
 
     case post.GET_POST_FAILURE:
-      return {
-        ...state,
-        postCreated: null,
-        postList: null,
-        error: action.payload,
-        userPost: null
-      }
+      return { ...state, postCreated: null, postModified: null, postList: [], userPost: [], error: action.payload }
+
     default:
       return state
   }
 }
 
-export default authReducer
+export default postReducer

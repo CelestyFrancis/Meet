@@ -5,7 +5,7 @@
   background-attachment: fixed;
   position: fixed;
   width: 100%;
-  overflow: hidden;
+  overflow: visible;
   border-radius: 0 0 85% 85% / 30%;
   color: #fff;
   text-shadow: 1px 1px 1px #333;

@@ -76,7 +76,33 @@ body {
   );
 }
 
-.login-form a {
-  margin-bottom: 1%;
+.demo-accounts {
+  padding: 14px 20px 18px;
+  border-top: 1px solid #eee;
   text-align: center;
+}
+
+.demo-label {
+  font-size: 12px;
+  color: #888;
+  margin: 0 0 8px;
+}
+
+.demo-btn {
+  width: auto;
+  border-radius: 20px;
+  border: 1px solid #dfccae;
+  background: #fdf6ef;
+  color: #423b35;
+  font-size: 13px;
+  padding: 5px 14px;
+  margin: 3px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.demo-btn:hover {
+  background: #fd5e086b;
+  color: #fff;
+  border-color: transparent;
 }

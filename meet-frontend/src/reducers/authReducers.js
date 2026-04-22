@@ -4,9 +4,8 @@ const initialState = {
   isAuthenticated: false,
   user: null,
   userId: null,
-  email: null,
   token: null,
-  error: null
+  error: null,
 }
 
 const authReducer = (state = initialState, action) => {
@@ -18,33 +17,15 @@ const authReducer = (state = initialState, action) => {
         user: action.payload.username,
         token: action.payload.token,
         userId: action.payload.id,
-        error: null
+        error: null,
       }
-
     case auth.LOGIN_FAILURE:
       return {
         ...state,
         isAuthenticated: false,
         user: null,
         token: null,
-        error: action.payload
-      }
-    case auth.REGISTER_FAILURE:
-      return {
-        ...state,
-        isAuthenticated: false,
-        user: null,
-        token: null,
-        error: action.payload
-      }
-    case auth.REGISTER_SUCCESS:
-      return {
-        ...state,
-        isAuthenticated: true,
-        user: action.payload.username,
-        token: action.payload.token,
-        userId: action.payload.id,
-        error: null
+        error: action.payload,
       }
     case auth.LOGOUT:
       return {
@@ -53,7 +34,7 @@ const authReducer = (state = initialState, action) => {
         user: null,
         token: null,
         userId: null,
-        error: null
+        error: null,
       }
     default:
       return state

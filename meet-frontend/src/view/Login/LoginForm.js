@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { loginUser } from '../../actions/authActions'
 import Error from '../../components/Error/Error'
+import users from '../../data/users'
 import './LoginForm.css'
 
 const LoginForm = () => {
@@ -14,16 +15,18 @@ const LoginForm = () => {
   const auth = useSelector(state => state.auth)
 
   const handleLogin = () => {
-    const userData = { email, password }
-    dispatch(loginUser(userData))
+    dispatch(loginUser({ email, password }))
+  }
+
+  const fillCredentials = user => {
+    setEmail(user.email)
+    setPassword(user.password)
   }
 
   useEffect(() => {
     if (auth.isAuthenticated) {
       localStorage.setItem('user', auth.user)
       localStorage.setItem('userId', auth.userId)
-      sessionStorage.setItem('token', auth.token)
-
       navigate('/dashboard')
     }
   }, [auth])
@@ -51,8 +54,15 @@ const LoginForm = () => {
             />
           </div>
         </div>
-        <a href='/register'>Not a user? Register!</a>
         <button onClick={handleLogin}>Login</button>
+        <div className='demo-accounts'>
+          <p className='demo-label'>Demo accounts — click to fill:</p>
+          {users.map(u => (
+            <button key={u.id} className='demo-btn' onClick={() => fillCredentials(u)}>
+              {u.username}
+            </button>
+          ))}
+        </div>
       </div>
     </div>
   )

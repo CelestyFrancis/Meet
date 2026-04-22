@@ -1,50 +1,11 @@
-import { SERVER_URL } from '../constants/server'
+import users from '../data/users'
 
-const loginUser = async userData => {
-  try {
-    const response = await fetch(SERVER_URL + '/auth/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      mode: 'cors',
-      body: JSON.stringify(userData)
-    })
-    if (response.status != 200) {
-      const data = await response.json()
-      throw new Error(data.message)
-    }
-    const data = await response.json()
-    return data
-  } catch (error) {
-    throw new Error(error.message)
-  }
+const loginUser = async ({ email, password }) => {
+  const user = users.find(u => u.email === email && u.password === password)
+  if (!user) throw new Error('Invalid email or password')
+  return { username: user.username, id: user.id, token: `user-${user.id}` }
 }
 
-const registerUser = async userData => {
-  try {
-    const response = await fetch(SERVER_URL + '/auth/register', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      mode: 'cors',
-      body: JSON.stringify(userData)
-    })
-    if (response.status != 200) {
-      const data = await response.json()
-      throw new Error(data.message)
-    }
-    const data = await response.json()
-    return data
-  } catch (error) {
-    throw new Error(error.message)
-  }
-}
-
-const authService = {
-  loginUser,
-  registerUser
-}
+const authService = { loginUser }
 
 export default authService

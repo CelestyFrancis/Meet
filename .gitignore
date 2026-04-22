@@ -1,0 +1,50 @@
+# ── Backend ──────────────────────────────────────────────
+# Personal database credentials — never commit
+meet-backend/app/config.py
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+
+# Virtual environments
+venv/
+env/
+.venv/
+.env/
+
+# Environment variable files
+.env
+.env.local
+.env.*.local
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+*.egg
+
+# Logs
+*.log
+
+# ── Frontend ─────────────────────────────────────────────
+meet-frontend/node_modules/
+meet-frontend/build/
+meet-frontend/coverage/
+meet-frontend/.pnp
+meet-frontend/.pnp.js
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ── Misc ─────────────────────────────────────────────────
+# Stale root-level lock file (no root package.json)
+/package-lock.json
+
+
+# ── OS ───────────────────────────────────────────────────
+.DS_Store
+Thumbs.db

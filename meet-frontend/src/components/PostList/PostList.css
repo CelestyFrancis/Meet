@@ -13,8 +13,7 @@
 }
 
 .post .section {
-  padding-left: 2%;
-  padding-right: 2%;
+  padding: 2%;
 }
 
 .post h1 {
@@ -22,6 +21,7 @@
   font-weight: 400;
   color: #423b35;
   font-size: 26px;
+  margin-top: 0.5em;
 }
 
 .post h1::first-letter {
@@ -30,20 +30,129 @@
 }
 
 .post p {
-  outline-offset: 110px;
   font-weight: 400;
 }
 
-.post .readmore {
+.post-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 8px;
+}
+
+.readmore {
   text-decoration-color: #dfccae;
   text-decoration: overline;
   color: #423b35;
-  display: block;
-  float: right;
   font-family: 'Playfair Display', serif;
   border-bottom: 2px inset #423b35;
+  margin: 0;
 }
 
-.post .readmore:hover {
+.readmore:hover {
   color: #f4821c;
+}
+
+.post-actions {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.btn-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: #423b35;
+  padding: 4px 6px;
+  border-radius: 4px;
+  transition: background 0.15s;
+}
+
+.btn-icon:hover {
+  background: rgba(0, 0, 0, 0.07);
+}
+
+.btn-icon--danger:hover {
+  background: rgba(220, 53, 69, 0.1);
+  color: #dc3545;
+}
+
+.edit-input {
+  width: 100%;
+  font-size: 18px;
+  font-style: italic;
+  border: none;
+  border-bottom: 2px solid #dfccae;
+  outline: none;
+  margin-bottom: 8px;
+  padding: 4px 0;
+  box-sizing: border-box;
+}
+
+.edit-textarea {
+  width: 100%;
+  border: 1px solid #dfccae;
+  border-radius: 4px;
+  padding: 8px;
+  font-size: 14px;
+  resize: vertical;
+  outline: none;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+
+.btn-save,
+.btn-cancel {
+  padding: 6px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: opacity 0.15s;
+}
+
+.btn-save {
+  background: linear-gradient(135deg, #9f05ff69 10%, #fd5e086b 100%);
+  color: #fff;
+}
+
+.btn-cancel {
+  background: #e0e0e0;
+  color: #333;
+}
+
+.btn-save:hover,
+.btn-cancel:hover {
+  opacity: 0.85;
+}
+
+.btn-friend {
+  background: none;
+  border: 1px solid #c9b99e;
+  cursor: pointer;
+  font-size: 18px;
+  color: #423b35;
+  padding: 3px 8px;
+  border-radius: 4px;
+  transition: background 0.15s;
+}
+
+.btn-friend:hover {
+  background: rgba(0,0,0,0.07);
+}
+
+.tag-requested {
+  font-size: 11px;
+  color: #999;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 2px 9px;
+}
+
+.no-posts {
+  text-align: center;
+  color: #888;
+  margin-top: 2em;
 }

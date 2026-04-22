@@ -1,75 +1,15 @@
-import { SERVER_URL } from '../constants/server'
+import postStorage from '../data/postStorage'
 
-const createPost = async post => {
-  try {
-    const response = await fetch(SERVER_URL + '/post/create', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: sessionStorage.getItem('token')
-      },
-      mode: 'cors',
-      body: JSON.stringify(post)
-    })
-    if (response.status != 200) {
-      const data = await response.json()
-      throw new Error(data.message)
-    }
-    const data = await response.json()
-    console.log(data)
-    return data
-  } catch (error) {
-    throw new Error(error.message)
-  }
-}
+const createPost = async post => postStorage.createPost(post)
 
-const getAllPosts = async () => {
-  try {
-    const response = await fetch(SERVER_URL + '/post/get', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: sessionStorage.getItem('token')
-      },
-      mode: 'cors'
-    })
+const getAllPosts = async () => ({ posts: postStorage.getPosts() })
 
-    if (response.status != 200) {
-      const data = await response.json()
-      throw new Error(data.message)
-    }
-    const data = await response.json()
-    return data
-  } catch (error) {
-    throw new Error(error.message)
-  }
-}
+const getUserPosts = async authorId => ({ posts: postStorage.getUserPosts(authorId) })
 
-const getUserPosts = async () => {
-  try {
-    const response = await fetch(SERVER_URL + '/post/get_my_post', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: sessionStorage.getItem('token')
-      },
-      mode: 'cors'
-    })
+const editPost = async (id, updates) => postStorage.updatePost(id, updates)
 
-    if (response.status != 200) {
-      const data = await response.json()
-      throw new Error(data.message)
-    }
-    const data = await response.json()
-    return data
-  } catch (error) {
-    throw new Error(error.message)
-  }
-}
-const postService = {
-  createPost,
-  getAllPosts,
-  getUserPosts
-}
+const deletePost = async id => postStorage.removePost(id)
+
+const postService = { createPost, getAllPosts, getUserPosts, editPost, deletePost }
 
 export default postService

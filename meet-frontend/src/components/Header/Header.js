@@ -1,9 +1,9 @@
-import React from 'react'
 import PropTypes from 'prop-types'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
 import { logout } from '../../actions/authActions'
+import Notifications from '../Notifications/Notifications'
 import './Header.css'
 
 const Header = props => {
@@ -15,8 +15,8 @@ const Header = props => {
     e.preventDefault()
     dispatch(logout())
 
-    localStorage.clear()
-    sessionStorage.clear()
+    localStorage.removeItem('user')
+    localStorage.removeItem('userId')
 
     navigate('/')
   }
@@ -28,6 +28,7 @@ const Header = props => {
       </div>
       <div className='log-out'>
         <p>hi {user}</p>
+        <Notifications />
         <i className='bx bx-log-out ' onClick={e => handleLogout(e)}></i>
       </div>
     </div>
